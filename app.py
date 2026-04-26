@@ -38,7 +38,7 @@ if st.button("Search") and query:
           "filter":[]
       }
   }
-        if filter_pub:
+    if filter_pub:
             base_query["bool"]["filter"].append({"term": {"publisher.keyword": filter_pub.lower()}})
    
   response = client.search(
