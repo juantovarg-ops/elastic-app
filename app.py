@@ -19,6 +19,7 @@ def pretty_response(response):
             source = hit["_source"]
             st.markdown(source.get("title", ""))
             st.markdown(source.get("summary", "No summary available"))
+            st.markdown(source.get("publisher", "NA"))
             st.markdown(f"**Score:** {hit['_score']}")
             st.markdown("---")
 
