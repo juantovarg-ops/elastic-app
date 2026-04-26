@@ -26,15 +26,21 @@ st.title("Search Engine")
 
 query = st.text_input("Enter your search query:", placeholder="Python, Javascript, etc.")
 
+filter_pub = st.text_input("Filter by publisher (optional):", placeholder="oreilly, etc")
+#{"term": {"publisher.keyword": "oreilly"}}
+
 if st.button("Search") and query:
   base_query = {
       "bool":{
           "must": [
               {"match": {"title": query}}
-          ]
+          ],
+          "filter":[]
       }
   }
-      
+    if filter_pub:
+        base_query["bool"]["filter"].append({"term": {"publisher.keyword": filter_pub.lower()}})
+   
   response = client.search(
       index="book_index_v1",
       body={
